@@ -20,5 +20,6 @@ public class StreamTest1 {
         List<String> list = stream.collect(Collectors.toCollection(ArrayList::new));
         list.forEach(System.out::println);
 
+        System.out.println("hello");
     }
 }
