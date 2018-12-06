@@ -22,5 +22,7 @@ public class StreamTest1 {
 
 
 	    list.forEach(str -> System.out.println());
+
+//	    zhangsan
     }
 }
