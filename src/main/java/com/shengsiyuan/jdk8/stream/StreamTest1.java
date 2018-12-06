@@ -19,6 +19,7 @@ public class StreamTest1 {
         Stream<String> stream = Stream.of("hello", "world", "welcome");
         List<String> list = stream.collect(Collectors.toCollection(ArrayList::new));
         list.forEach(System.out::println);
-
+	
+	list.forEach(str -> System.out.println);
     }
 }
