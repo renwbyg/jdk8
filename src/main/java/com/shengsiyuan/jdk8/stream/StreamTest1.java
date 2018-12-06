@@ -25,7 +25,10 @@ public class StreamTest1 {
 
 //	    zhangsan
 //  		hello
-//  		world
-//        welcome
+//
+//
+//
+//
+//  world
     }
 }
