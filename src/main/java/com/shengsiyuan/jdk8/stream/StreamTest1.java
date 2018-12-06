@@ -26,5 +26,8 @@ public class StreamTest1 {
 //	    zhangsan
         System.out.println("hello");
         System.out.println("world");
+
+
+
     }
 }
