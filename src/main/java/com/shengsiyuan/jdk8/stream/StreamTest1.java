@@ -23,12 +23,7 @@ public class StreamTest1 {
 
 	    list.forEach(str -> System.out.println());
 
-//	    zhangsan
-//  		hello
-//
-//
-//
-//
-//  world
+        System.out.println("hello");
+        System.out.println("world");
     }
 }
