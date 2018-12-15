@@ -58,17 +58,17 @@ public class MySetCollectTest<T> implements Collector<T,Set<T>, Map<T,T>> {
 	@Override
 	public Set<Characteristics> characteristics() {
 		System.out.println("characteristics invoked!");
-		return Collections.unmodifiableSet(EnumSet.of(Characteristics.UNORDERED, Characteristics.CONCURRENT));
+		return Collections.unmodifiableSet(EnumSet.of(Characteristics.UNORDERED));
 	}
 
 	public static void main(String[] args) {
 		System.out.println(Runtime.getRuntime().availableProcessors());
-		for (int i=0; i<1; i++){
+		for (int i=0; i<100; i++){
 			List<String> list = Arrays.asList("hello", "world", "hello world", "welcome", "a", "b", "c", "d");
 			Set<String> set = new HashSet<>();
 			set.addAll(list);
 			System.out.println(set);
-			Map<String, String> map = set.stream().collect(new MySetCollectTest<>());
+			Map<String, String> map = set.parallelStream().collect(new MySetCollectTest<>());
 			System.out.println(map);
 		}
 
