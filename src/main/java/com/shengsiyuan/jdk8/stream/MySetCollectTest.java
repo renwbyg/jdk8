@@ -19,19 +19,27 @@ public class MySetCollectTest<T> implements Collector<T,Set<T>, Map<T,T>> {
 	@Override
 	public Supplier<Set<T>> supplier() {
 		System.out.println("supplier invoked!");
-		return HashSet<T>::new;
+//		return HashSet<T>::new;
+		return () -> {
+			System.out.println("---------");
+			return new HashSet<T>();
+		};
 	}
 
 	@Override
 	public BiConsumer<Set<T>, T> accumulator() {
 		System.out.println("accumulator invoked!");
-		return (set, item) -> set.add(item);
+		return (set, item) -> {
+			System.out.println("accumulator: " + set + ", " + Thread.currentThread().getName());
+			set.add(item);};
 	}
 
 	@Override
 	public BinaryOperator<Set<T>> combiner() {
 		System.out.println("combiner invoked!");
 		return (set1,set2) -> {
+			System.out.println("set1: " + set1);
+			System.out.println("set2: " + set2);
 			set1.addAll(set2);
 			return set1;
 		};
@@ -50,15 +58,19 @@ public class MySetCollectTest<T> implements Collector<T,Set<T>, Map<T,T>> {
 	@Override
 	public Set<Characteristics> characteristics() {
 		System.out.println("characteristics invoked!");
-		return Collections.unmodifiableSet(EnumSet.of(Characteristics.UNORDERED));
+		return Collections.unmodifiableSet(EnumSet.of(Characteristics.UNORDERED, Characteristics.CONCURRENT));
 	}
 
 	public static void main(String[] args) {
-		List<String> list = Arrays.asList("hello", "world", "hello world", "welcome", "a", "b", "c", "d");
-		Set<String> set = new HashSet<>();
-		set.addAll(list);
-		System.out.println(set);
-		Map<String, String> map = set.stream().collect(new MySetCollectTest<>());
-		System.out.println(map);
+		System.out.println(Runtime.getRuntime().availableProcessors());
+		for (int i=0; i<1; i++){
+			List<String> list = Arrays.asList("hello", "world", "hello world", "welcome", "a", "b", "c", "d");
+			Set<String> set = new HashSet<>();
+			set.addAll(list);
+			System.out.println(set);
+			Map<String, String> map = set.stream().collect(new MySetCollectTest<>());
+			System.out.println(map);
+		}
+
 	}
 }
