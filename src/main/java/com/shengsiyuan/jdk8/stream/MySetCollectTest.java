@@ -29,6 +29,7 @@ public class MySetCollectTest<T> implements Collector<T,Set<T>, Map<T,T>> {
 	@Override
 	public BiConsumer<Set<T>, T> accumulator() {
 		System.out.println("accumulator invoked!");
+//		return Set<T>::add;
 		return (set, item) -> {
 			System.out.println("accumulator: " + set + ", " + Thread.currentThread().getName());
 			set.add(item);};
