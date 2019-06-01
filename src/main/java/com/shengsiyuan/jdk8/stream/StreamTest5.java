@@ -13,6 +13,9 @@ public class StreamTest5 {
 		Student s4 = new Student("zhangsan", 20, 90);
 
 		List<Student> students = Arrays.asList(s1, s2, s3, s4);
+
+		System.out.println("count: " + students.stream().collect(Collectors.counting()));
+		System.out.println("count: " + students.stream().count());
 //		Map<String, List<Student>> map = students.stream().collect(Collectors.groupingBy(s -> s.getName()));
 
 //		Map<Integer, Long> map = students.stream().collect(Collectors.groupingBy(Student::getScore, Collectors.counting()));
